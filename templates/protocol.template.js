@@ -101,3 +101,48 @@ Message.prototype._pending = function(type, value) {
     return;
   }
 }
+
+function listen(stream) {
+  var len = undefined
+    , recieved = 0
+    , buffer = undefined;
+
+  function reset() {
+    len = undefined;
+    recieved = 0;
+    buffer = undefined;
+  }
+
+  stream.on('data', function recv(data) {
+      /*
+       * use xfer TLV
+      var dataLen = data.length;
+      if(len === undefined) {
+        len = data.readInt16BE();
+        if(len <= dataLen) {
+          emit(data.slice(0, len));
+          reset();
+          if(dataLen > len)
+            return recv(data.slice(len));
+          return;
+        } else {
+          buffer = new Buffer(len);
+        }
+      }
+
+      var end = len - recieved;
+      if(end>dataLen) {
+        end = dataLen;
+      }
+      data.copy(buffer, recieved, 0, end);
+      recieved += end;
+
+      if(recieved === len) {
+        emit(buffer);
+        reset();
+        recv(buffer.slice(end));
+      }
+      */
+  });
+
+}
